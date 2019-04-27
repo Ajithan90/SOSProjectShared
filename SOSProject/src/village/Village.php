@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=Cp1252">
 <title>Village</title>
-<link rel="stylesheet" type="text/css" href="../css/subpage.css"/>
+<link rel="stylesheet" type="text/css" href="../../css/subpage.css"/>
 
 <script type="text/javascript">
 function remove(id)
@@ -89,7 +89,7 @@ function remove(id)
 
 </div>
     </div>
-<script src="../script/modelwindow.js"></script>
+<script src="../../script/modelwindow.js"></script>
    
     
     <div id="table">
@@ -101,10 +101,11 @@ function remove(id)
     <td>Director Name</td>
     <td>Phone Number</td>
     <td>Email ID</td>
+    <td>Update</td>
     <td>Delete</td>
     </tr>
     <?php
-	   include 'connection.php';
+	   include ('../connection.php');
         $sql="SELECT * FROM villages";
         $result_set=mysqli_query($con,$sql);
         while($row=mysqli_fetch_array($result_set))
@@ -117,7 +118,9 @@ function remove(id)
         <td align="center"><?php echo $row['Director_Name'] ?></td>
         <td align="center"><?php echo $row['Telephone_NO'] ?></td>
         <td align="center"><?php echo $row['Email_ID'] ?></td>
-        <td align="center"><a href="javascript:remove(<?php echo $row['Village_ID'] ?>)"><img alt="delete" src="../images/delete.png"/></a></td>
+        <td align="center"><a href=""><img alt="delete" src="../../images/update.png"/></a></td>
+        <td align="center"><a href="javascript:remove(<?php echo $row['Village_ID'] ?>)"><img alt="delete" src="../../images/delete.png"/></a></td>
+        
         </tr>
         <?php
         }

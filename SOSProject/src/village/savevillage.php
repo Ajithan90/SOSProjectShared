@@ -1,5 +1,5 @@
 <?php
-include 'connection.php';
+include ('../connection.php');
 $vname=$_POST['village_name'];
 $adl1=$_POST['address_line1'];
 $adl2=$_POST['address_line2'];
