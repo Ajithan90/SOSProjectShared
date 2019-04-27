@@ -6,7 +6,7 @@
 </head>
     <body>
     <div>
-    	<a href="Village.php">Village</a>
+    	<a href="village/Village.php">Village</a>
     	
     	</div>
     </body>
