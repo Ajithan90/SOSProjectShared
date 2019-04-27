@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=Cp1252">
 <title>Village</title>
-<link rel="stylesheet" type="text/css" href="../css/main.css"/>
+<link rel="stylesheet" type="text/css" href="../css/subpage.css"/>
 
 </head>
     
