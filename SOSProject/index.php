@@ -6,8 +6,7 @@
 </head>
     <body>
     <?php 
-    echo ("HelloWorld...");
-    
+    echo "<script language='javascript' type='text/javascript'>window.open('src/login.php','_self')</script>";
     ?>
     
     </body>
