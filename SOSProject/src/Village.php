@@ -5,6 +5,16 @@
 <title>Village</title>
 <link rel="stylesheet" type="text/css" href="../css/subpage.css"/>
 
+<script type="text/javascript">
+function remove(id)
+{
+	if(confirm(' Are you sure ?  '))
+	{
+		window.location='deletevillage.php?remove_id='+id;
+	}
+}
+</script>
+
 </head>
     
     <body>
@@ -91,6 +101,7 @@
     <td>Director Name</td>
     <td>Phone Number</td>
     <td>Email ID</td>
+    <td>Delete</td>
     </tr>
     <?php
 	   include 'connection.php';
@@ -106,6 +117,7 @@
         <td align="center"><?php echo $row['Director_Name'] ?></td>
         <td align="center"><?php echo $row['Telephone_NO'] ?></td>
         <td align="center"><?php echo $row['Email_ID'] ?></td>
+        <td align="center"><a href="javascript:remove(<?php echo $row['Village_ID'] ?>)"><img alt="delete" src="../images/delete.png"/></a></td>
         </tr>
         <?php
         }
