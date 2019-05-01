@@ -1,134 +1,175 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
-<html>
+
+
+<?php require_once ("../connection.php");//db connection 
+	
+$vname="";
+$adl1="";
+$adl2="";
+$city="";
+$zip="";
+$dname="";
+$pnum="";
+$email="";
+$vid="";
+	
+		
+		
+		
+		
+		
+		if(isset($_GET['ppid'])){
+			$ppid = $_GET['ppid'];
+			$sqlLoader="Select from villages where Village_ID=?";
+			$resLoader=$db->prepare($sqlLoader);
+			$resLoader->execute(array($ppid));		
+			while($rowLoader = $resLoader->fetch(PDO::FETCH_ASSOC)){
+			    $vid=$rowLoader['Village_ID'];
+			    $vname=$rowLoader['Village'];
+			    $adl1=$rowLoader['Address_Line1'];	
+			    $adl2=$rowLoader['Address_Line2'];
+			    $city=$rowLoader['City'];
+			    $zip=$rowLoader['ZIP'];
+			    $dname=$rowLoader['Director_Name'];
+			    $pnum=$rowLoader['Telephone_NO'];
+			    $email=$rowLoader['Email_ID'];
+				
+				
+			}
+	} 
+	
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=Cp1252">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Village</title>
-<link rel="stylesheet" type="text/css" href="../../css/subpage.css"/>
-
+<script type="text/javascript" src="../../script/jquery.min.js"></script>
+<script type="text/javascript" src="../../script/fancybox/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="../../script/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
+<script type="text/javascript" src="../../script/fancybox/jquery.fancybox.js?v=2.1.5"></script>
+<link rel="stylesheet" type="text/css" href="../../script/fancybox/jquery.fancybox.css?v=2.1.5" media="screen" />
+<link rel="stylesheet" type="text/css" href="../../script/fancybox/jquery.fancybox-buttons.css?v=1.0.5" />
+<script type="text/javascript" src="../../script/fancybox/jquery.fancybox-buttons.js?v=1.0.5"></script>
 <script type="text/javascript">
-function remove(id)
-{
-	if(confirm(' Are you sure ?  '))
-	{
-		window.location='deletevillage.php?remove_id='+id;
-	}
+$(document).ready(function() {
+	$(".fancybox").fancybox();
+});
+</script>	
+    <style type="text/css" title="currentStyle">
+			@import "../../css/demo_page.css";
+			@import "../../css/demo_table_jui.css";
+			@import "../../css/jquery-ui-1.8.4.custom.css";
+		</style>
+<script src="../../script/jquery.dataTables.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			jQuery(document).ready(function() {
+				oTable = jQuery('#tbl').dataTable({
+					"bJQueryUI": true,
+					"sPaginationType": "full_numbers"
+								} );
+				});		
+		</script>
+        
+<style>
+#myButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf));
+	background:-moz-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:-webkit-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:-o-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:-ms-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+	background:linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf',GradientType=0);
+	background-color:#ededed;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
 }
-</script>
+#myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed));
+	background:-moz-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:-webkit-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:-o-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:-ms-linear-gradient(top, #dfdfdf 5%, #ededed 100%);
+	background:linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed',GradientType=0);
+	background-color:#dfdfdf;
+}
+#myButton:active {
+	position:relative;
+	top:1px;
+}
+a:link {
+	color: #000;
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #000;
+}
+a:hover {
+	text-decoration: none;
+	color: #FFF;
+}
+a:active {
+	text-decoration: none;
+	color: #FFF;
+}
 
+</style>
 </head>
-    
-    <body>
-    <div id="ADBtn">
-    <button id="myBtn">Add</button>
+<body>
+<h1 align="center">Village Details</h1>
 
-        <!-- The Modal -->
-		<div id="myModal" class="modal">
+<a href="addnewvillage.php" id="myButton" class="fancybox fancybox.ajax">Add</a>
+<br/><br/>
 
-           <!-- Modal content -->
-  		<div class="modal-content">
-    	<span class="close">&times;</span>
-    	<h3>Add Village</h3>
-    	<form method="post" action="savevillage.php">
-    	<table align="center">
-    		<tr>
-    			<td>Village Name:</td><td><input type = "text" name = "village_name" required/><br/></td>
-    		</tr>
-    		<tr>
-    			<td></td>
-    		</tr>
-    		
-    		<tr>
-    			<td>Address Line1: </td><td><input type = "text" name = "address_line1" required/><br/></td>
-    		</tr>
-    		<tr>
-    			<td></td>
-    		</tr>
-    		<tr>
-    			<td>Address Line2: </td><td><input type = "text" name = "address_line2" /><br/></td>
-    		</tr>
-    		<tr>
-    			<td></td>
-    		</tr>
-    		<tr>
-    			<td>City: </td><td><input type = "text" name = "city" required/><br/></td>
-    		</tr>
-    		<tr>
-    			<td></td>
-    		</tr>
-    		<tr>
-    			<td>ZIP: </td><td><input type = "number" name = "zip" required/><br/></td>
-    		</tr>
-    		<tr>
-    			<td></td>
-    		</tr>
-    		<tr>
-    			<td>Director Name: </td><td><input type = "text" name = "director_name" required/><br/></td>
-    		</tr>
-    		<tr>
-    			<td></td>
-    		</tr>
-    		<tr>
-    			<td>Phone Number: </td><td><input type = "tel" name = "phone_number" required/><br/></td>
-    		</tr>
-    		<tr>
-    			<td></td>
-    		</tr>
-    		<tr>
-    			<td>Email: </td><td><input type ="email"  name = "email" /><br/></td>
-    		</tr>
-    		
-    	
-    	</table>
-    	 <div align="right" id="subbtn">
-    	 <input type ="submit"/>
-    	 
-    	 </div>
-    	
-    	</form>
-  </div>
 
-</div>
-    </div>
-<script src="../../script/modelwindow.js"></script>
-   
-    
-    <div id="table">
-    <table width="70%" border="1">
-    <tr align="center">
-    <td>Village ID</td>
-    <td>Village Name</td>
-	<td>Address</td>
-    <td>Director Name</td>
-    <td>Phone Number</td>
-    <td>Email ID</td>
-    <td>Update</td>
-    <td>Delete</td>
-    </tr>
-    <?php
-	   include ('../connection.php');
-        $sql="SELECT * FROM villages";
-        $result_set=mysqli_query($con,$sql);
-        while($row=mysqli_fetch_array($result_set))
-        {
-         ?>
-        <tr>
-        <td><?php echo $row['Village_ID'] ?></td>
-        <td align="center"><?php echo $row['Village'] ?></td>
-		<td align="center"><?php echo $row['Address_Line1']." ".$row['Address_Line2']." ".$row['City']." ".$row['ZIP']?></td>
-        <td align="center"><?php echo $row['Director_Name'] ?></td>
-        <td align="center"><?php echo $row['Telephone_NO'] ?></td>
-        <td align="center"><?php echo $row['Email_ID'] ?></td>
-        <td align="center"><a href=""><img alt="delete" src="../../images/update.png"/></a></td>
-        <td align="center"><a href="javascript:remove(<?php echo $row['Village_ID'] ?>)"><img alt="delete" src="../../images/delete.png"/></a></td>
-        
-        </tr>
-        <?php
-        }
-        ?>
-</table>
-        
-        </div>
-    	
-    </body>
-  
+<?php //Search Start
+					$sql="Select * from villages";
+					$res=$db->prepare($sql);
+					$res->execute();		
+					$str="<div class='demo_jui'><table cellpadding='0' cellspacing='0' border='0' class='display' id='tbl' class='jtable'>";
+					$str.="<thead><tr><th>Village ID</th><th>Village Name</th><th>Address</th><th>Director Name</th><th>Phone Number</th><th>Email</th><th>Action</th></tr></thead><tbody>";
+						
+						
+						while($row = $res->fetch(PDO::FETCH_ASSOC)){
+						    $str.="<td>".$row['Village_ID']."</td>";
+						    $str.="<td>".$row['Village']."</td>";
+							$str.="<td>".$row['Address_Line1']." ".$row['Address_Line2']."</br> ".$row['City']." ".$row['ZIP']."</td>";
+							$str.="<td>".$row['Director_Name']."</td>";
+							$str.="<td>".$row['Telephone_NO']."</td>";
+							$str.="<td>".$row['Email_ID']."</td>";
+							
+							
+							
+							//Edit,Delete link
+							$str.="<td><center><a class='fancybox fancybox.ajax' 
+							href='updatevillage.php?ppid=".$row['Village_ID']."' onclick='return update()'>
+							<img src = '../../images/update.png' alt = 'edit' title = 'edit'/></a>
+							
+
+
+                            <a href='deletevillage.php?pid=".$row['Village_ID']."' onclick='return bura()' >
+							<img src = '../../images/delete.png' alt = 'delete' 
+							title = 'delete'/></a></center></td></tr>";
+						}
+						echo $str;
+						echo "</tbody></table></div>";
+               //SEARCH END ?>
+
+
+</body>
 </html>

@@ -1,15 +1,12 @@
 <?php
-include 'connection.php';
+include '../connection.php';
 
-    if(isset($_GET['remove_id']))
-    {
-        
-        mysqli_query($con,"DELETE FROM villages WHERE Village_ID=".$_GET['remove_id']);
-        
-        
-    }
-    echo "<script language='javascript' type='text/javascript'>alert('Successfully Deleted!')</script>";
-    echo "<script language='javascript' type='text/javascript'>window.open('Village.php','_self')</script>";
+$pid=$_GET['pid'];
+$sql="DELETE FROM villages where Village_ID=?";
+$qry=$db->prepare($sql);
+$qry->execute(array($pid));
+echo "<script language='javascript' type='text/javascript'>alert('Successfully Deleted!')</script>";
+echo "<script language='javascript' type='text/javascript'>window.open('Village.php','_self')</script>";
 
 
 ?>
