@@ -11,37 +11,41 @@ $pnum=$_POST['phone_number'];
 
 $id=$_POST['pid'];
 if($id==null){
-    $sql = "SELECT School_ID FROM school ORDER BY School_ID DESC LIMIT 1;";
-    $result = mysqli_query($con,$sql);
-    $nor = $result->num_rows;
-    if($nor>0){
-        $rec = mysqli_fetch_assoc($result);
-        $scl_id = $rec["School_ID"];
-        $num = substr($scl_id,1);
-        $num++;
-        if($num<10)
-            $sid = "S000".$num;
-            else if($num<100)
-                $sid = "S00".$num;
-                else if($num<1000)
-                    $sid = "S0".$num;
-                    else
-                        $sid = "S".$num;
-                       
-    }
-    else{
-        $sid = "S0001";
+    $sqlSelection="SELECT School_ID FROM school ORDER BY School_ID DESC LIMIT 1";
+    $qryselection=$db->prepare($sqlSelection);
+    $qryselection->execute();
+    $nor=$qryselection->fetchColumn();
+    $nor=substr($nor,1);
+
+if($nor>0){
+        
+        $nor++;
+    if($nor<10)
+        $sid = "S000".$nor;
+        else if($nor<100)
+            $sid = "S00".$nor;
+            else if($nor<1000)
+                $sid = "S0".$nor;
+                else
+                    $sid = "S".$nor;
+                    
+                    
 }
-$sql="INSERT INTO school(School_ID,School_name,Address_Line1,Address_Line2,City,ZIP,District,Telephone_NO) 
-VALUES('$sid','$sname','$adl1','$adl2','$city','$zip','$dname','$pnum')";
-mysqli_query($con,$sql);
+else{
+    $sid = "S0001";
+}
+    
+$sql="INSERT INTO school(School_ID,School_name,Address_Line1,Address_Line2,City,ZIP,District,Telephone_NO)values
+			(:sclid,:sclna,:addl1,:addl2,:city,:zip,:dname,:pnum)";
+$qry=$db->prepare($sql);
+$qry->execute(array(':sclid'=>$sid,':sclna'=>$sname,':addl1'=>$adl1,':addl2'=>$adl2,':city'=>$city,':zip'=>$zip,':dname'=>$dname,':pnum'=>$pnum));
 }
 else {
-    $sql="UPDATE school SET School_name='$sname',Address_Line1='$adl1',Address_Line2='$adl2',City='$adl2',ZIP='$zip',District='$dname',Telephone_NO='$pnum' where School_ID='$id'";
-
-    mysqli_query($con,$sql);
+   $sql="UPDATE school SET School_ID=?,School_name=?,Address_Line1=?,Address_Line2=?,City=?,ZIP=?,District=?,Telephone_NO=? where School_ID=?";
+    $qry=$db->prepare($sql);
+    $qry->execute(array($id,$sname,$adl1,$adl2,$city,$zip,$dname,$pnum,$id));
 }
-mysqli_close($con);
+
 
 echo "<script language='javascript' type='text/javascript'>alert('Successfully Saved!')</script>";
 echo "<script language='javascript' type='text/javascript'>window.open('school.php','_self')</script>";

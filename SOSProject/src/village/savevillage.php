@@ -11,37 +11,42 @@ $email=$_POST['email'];
 
 $id=$_POST['pid'];
 if($id==null){
-    $sql = "SELECT Village_ID FROM villages ORDER BY Village_ID DESC LIMIT 1;";
-    $result = mysqli_query($con,$sql);
-    $nor = $result->num_rows;
+    $sqlSelection="SELECT Village_ID FROM villages ORDER BY Village_ID DESC LIMIT 1";
+    $qryselection=$db->prepare($sqlSelection);
+    $qryselection->execute();
+    $nor=$qryselection->fetchColumn();
+    $nor=substr($nor,1);
+    
     if($nor>0){
-        $rec = mysqli_fetch_assoc($result);
-        $vill_id = $rec["Village_ID"];
-        $num = substr($vill_id,1);
-        $num++;
-        if($num<10)
-            $vid = "V000".$num;
-            else if($num<100)
-                $vid = "V00".$num;
-                else if($num<1000)
-                    $vid = "V0".$num;
+    
+        $nor++;
+        if($nor<10)
+            $vid = "V000".$nor;
+            else if($nor<100)
+                $vid = "V00".$nor;
+                else if($nor<1000)
+                    $vid = "V0".$nor;
                     else
-                        $vid = "V".$num;
+                        $vid = "V".$nor;
                        
     }
     else{
         $vid = "V0001";
-}
-$sql="INSERT INTO villages(Village_ID,Village,Address_Line1,Address_Line2,City,ZIP,Director_Name,Telephone_NO,Email_ID) 
-VALUES('$vid','$vname','$adl1','$adl2','$city','$zip','$dname','$pnum','$email')";
-mysqli_query($con,$sql);
+    }
+   
+
+$sql="INSERT INTO villages(Village_ID,Village,Address_Line1,Address_Line2,City,ZIP,Director_Name,Telephone_NO,Email_ID)values
+			(:villid,:viilna,:addl1,:addl2,:city,:zip,:dname,:pnum,:email)";
+
+$qry=$db->prepare($sql);
+$qry->execute(array(':villid'=>$vid,':viilna'=>$vname,':addl1'=>$adl1,':addl2'=>$adl2,':city'=>$city,':zip'=>$zip,':dname'=>$dname,':pnum'=>$pnum,':email'=>$email));
 }
 else {
-    $sql="UPDATE villages SET Village='$vname',Address_Line1='$adl1',Address_Line2='$adl2',City='$adl2',ZIP='$zip',Director_Name='$dname',Telephone_NO='$pnum',Email_ID='$email' where Village_ID='$id'";
-
-    mysqli_query($con,$sql);
+    $sql="UPDATE villages SET Village_ID=?,Village=?,Address_Line1=?,Address_Line2=?,City=?,ZIP=?,Director_Name=?,Telephone_NO=?,Email_ID=? where Village_ID=?";
+    $qry=$db->prepare($sql);
+    $qry->execute(array($id,$vname,$adl1,$adl2,$city,$zip,$dname,$pnum,$email,$id));
 }
-mysqli_close($con);
+
 
 echo "<script language='javascript' type='text/javascript'>alert('Successfully Saved!')</script>";
 echo "<script language='javascript' type='text/javascript'>window.open('Village.php','_self')</script>";

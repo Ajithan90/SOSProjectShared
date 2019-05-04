@@ -1,13 +1,3 @@
-<?php
-$username = "root";
-$password = "";
-$hostname = "127.0.0.1";
-$db_name="sos";
-
-//connection to the database
-$con=mysqli_connect("$hostname", "$username", "$password","$db_name") or die("cannot connect");
-
-?>
 
 <?php
 
@@ -21,7 +11,7 @@ class Database extends pdo {
 
     public function __construct(){ 
         $this->dbtype = 'mysql'; 
-        $this->host = 'localhost'; 
+        $this->host = '127.0.0.1'; 
         $this->user = 'root'; 
         $this->pass = ''; 
         $this->database = 'sos'; 
