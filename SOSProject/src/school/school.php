@@ -3,7 +3,7 @@ session_start();
 
 // Check, if username session is NOT set then this page will jump to login page
 if ((!isset($_SESSION['user_id']) && (!isset($_SESSION['logd_in'])))) {
-header('Location:login.php');
+header('Location:../login.php');
 }
 ?>
 
@@ -135,8 +135,26 @@ a:active {
 }
 
 </style>
+ <link rel="stylesheet" href="../../css/menu.css">
 </head>
-<body>
+
+<body style="background-color:#40c3ce;">
+<div id='cssmenu'>
+<ul>
+   <li><a href='#'><span>Home</span></a></li>
+   <li class='active has-sub'><a href='#'><span>Category</span></a>
+      <ul>
+         <li class='has-sub'><a href='#'><span>Village</span></a>
+         </li>
+         <li class='has-sub'><a href='#'><span>School</span></a>
+         </li>
+      </ul>
+   </li>
+   <li><a href='#'><span>About US</span></a></li>
+   <li class='last'><a href='#'><span>Contact US</span></a></li>
+   <li class='last'><a href='../logout.php'><span>Log Out</span></a></li>
+</ul>
+</div>
 <h1 align="center">School Details</h1>
 
 <a href="addschool.php" id="myButton" class="fancybox fancybox.ajax">Add</a>

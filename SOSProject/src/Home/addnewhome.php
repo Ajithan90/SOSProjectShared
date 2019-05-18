@@ -1,4 +1,3 @@
-
 <?php 
 session_start();
 
@@ -9,23 +8,16 @@ if ((!isset($_SESSION['user_id']) && (!isset($_SESSION['logd_in'])))) {
 ?>
 <?php require_once ("../connection.php");
 $ppid="";
-$vname="";
-$adl1="";
-$adl2="";
-$city="";
-$zip="";
-$dname="";
-$pnum="";
-$email="";
+$hname="";
 $vid="";
+$mother="";
+$hid="";
 
 if(isset($_GET['ppid'])){
     $ppid = $_GET['ppid'];
-    $sqlLoader="Select from villages where Village_ID=?";
+    $sqlLoader="Select from home where Home_ID=?";
     $resLoader=$db->prepare($sqlLoader);
     $resLoader->execute(array($ppid));
-    
-    
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -33,9 +25,6 @@ if(isset($_GET['ppid'])){
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-
-
-<title></title>
 <style>
 .myButton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
@@ -79,92 +68,52 @@ if(isset($_GET['ppid'])){
 }
 </style>
 </head>
-<?php
-
-
-$sqladd="Select * from villages where Village_ID=?";
-$resadd=$db->prepare($sqladd);
-$resadd->execute(array($ppid));
-while($rowadd = $resadd->fetch(PDO::FETCH_ASSOC)){
-    $vid=$rowadd['Village_ID'];
-    $vname=$rowadd['Village'];
-    $adl1=$rowadd['Address_Line1'];
-    $adl2=$rowadd['Address_Line2'];
-    $city=$rowadd['City'];
-    $zip=$rowadd['ZIP'];
-    $dname=$rowadd['Director_Name'];
-    $pnum=$rowadd['Telephone_NO'];
-    $email=$rowadd['Email_ID'];
-    
-				
-}
-	
-?>
-
 <body>
-<h1 align="center">Update Village Details</h1>
-    <form method="post" name="frmvillagee" action="savevillage.php">
+    <form method="post" name="frmvillage" action="savehome.php">
+    	<h3 align="center"> ADD New Home </h3>
     <input type="hidden" name="pid" value="<?php echo $ppid; ?>"/>
     <table>
-    		<tr>
-    			<td>Village ID:</td><td><input type = "text" name = "village_id" required="required" value="<?php echo $vid; ?>"  disabled="disabled"><br/></td>
-    		</tr>
-    		<tr>
+     
          <tr>
-    			<td>Village Name:</td><td><input type = "text" name = "village_name" required="required" value="<?php echo $vname; ?>" ><br/></td>
+    			<td>Home Name:</td><td><input type = "text" name = "home_name" required="required"><br/></td>
     		</tr>
     		<tr>
     			<td></td>
     		</tr>
     		
     		<tr>
-    			<td>Address Line1: </td><td><input type = "text" name = "address_line1" required="required" value="<?php echo $adl1; ?>"/><br/></td>
+    			<td>Mother In Charge </td><td><input type = "text" name = "mother" required="required" /><br/></td>
     		</tr>
     		<tr>
     			<td></td>
     		</tr>
     		<tr>
-    			<td>Address Line2: </td><td><input type = "text" name = "address_line2" value="<?php echo $adl2; ?>"/><br/></td>
-    		</tr>
-    		<tr>
-    			<td></td>
-    		</tr>
-    		<tr>
-    			<td>City: </td><td><input type = "text" name = "city" required="required" value="<?php echo $city; ?>"/><br/></td>
-    		</tr>
-    		<tr>
-    			<td></td>
-    		</tr>
-    		<tr>
-    			<td>ZIP: </td><td><input type = "number" name = "zip" required="required" value="<?php echo $zip; ?>"/><br/></td>
-    		</tr>
-    		<tr>
-    			<td></td>
-    		</tr>
-    		<tr>
-    			<td>Director Name: </td><td><input type = "text" name = "director_name" required="required" value="<?php echo $dname; ?>"/><br/></td>
-    		</tr>
-    		<tr>
-    			<td></td>
-    		</tr>
-    		<tr>
-    			<td>Phone Number: </td><td><input type = "tel" name = "phone_number" required="required" value="<?php echo $pnum; ?>"/><br/></td>
-    		</tr>
-    		<tr>
-    			<td></td>
-    		</tr>
-    		<tr>
-    			<td>Email: </td><td><input type ="email"  name = "email" value="<?php echo $email; ?>"/><br/></td>
-    		</tr>
+    			<td> Village ID</td>
+    			<td>
+    			
+                 <select name="vid" id="">
+	<option value="">--Select here--</option>
+<?php
+require_once ("../connection.php");
+$sql = "SELECT Village_ID FROM villages;";
+$res=$db->prepare($sql);
+$res->execute();
+
+while($rec = $res->fetch(PDO::FETCH_ASSOC)){
+    echo("<option value='".$rec["Village_ID"]."'selected>".$rec["Village_ID"]."</option>");
+}
+	
+?>
+</select>
+    			
+    			
+               </td>
+  </tr>
+               <tr><td></td><td></td><td><input type="submit" class="myButton" value="Save"/></td></tr>
     	
-   
-
-			
-		<tr><td></td><td></td><td><input type="submit" class="myButton" value="Save"/></td></tr>
-        
-		
-		</table>
-    </form>
-
+    	</table>
+    	
+    	
+    	</form>
 </body>
 </html>
