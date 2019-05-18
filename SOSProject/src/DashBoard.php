@@ -23,6 +23,14 @@ header('Location:login.php');
     	
     	</div>
     	<div>
+    	<a href="school/school.php">School</a>
+    	
+    	</div>
+    	<div>
+    	<a href="home/home.php">Home</a>
+    	
+    	</div>
+    	<div>
     	<a href="logout.php">Log out</a>
     	
     	</div>

@@ -141,7 +141,7 @@ a:active {
 <body style="background-color:#40c3ce;">
 <div id='cssmenu'>
 <ul>
-   <li><a href='#'><span>Home</span></a></li>
+   <li><a href='../DashBoard.php'><span>Home</span></a></li>
    <li class='active has-sub'><a href='#'><span>Category</span></a>
       <ul>
          <li class='has-sub'><a href='#'><span>Village</span></a>
