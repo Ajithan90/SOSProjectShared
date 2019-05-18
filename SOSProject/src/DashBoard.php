@@ -36,8 +36,8 @@ header('Location:login.php');
     	</div>
     	
   <div id="clock">
-  <canvas id="canvas" width="400" height="400"
-style="background-color:#333">
+  <canvas id="canvas" width="300" height="300"
+style="background-color:#fff">
 </canvas>
 
 <script>
@@ -58,12 +58,12 @@ function drawFace(ctx, radius) {
   var grad;
   ctx.beginPath();
   ctx.arc(0, 0, radius, 0, 2*Math.PI);
-  ctx.fillStyle = 'white';
+  ctx.fillStyle = '#c4f3ff';
   ctx.fill();
   grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
-  grad.addColorStop(0, '#333');
-  grad.addColorStop(0.5, 'white');
-  grad.addColorStop(1, '#333');
+  grad.addColorStop(0, '#40c3ce');
+  grad.addColorStop(0.5, '#40c3ce');
+  grad.addColorStop(1, '#40c3ce');
   ctx.strokeStyle = grad;
   ctx.lineWidth = radius*0.1;
   ctx.stroke();
@@ -121,7 +121,6 @@ function drawHand(ctx, pos, length, width) {
     ctx.rotate(-pos);
 }
 </script>
-  
   
   </div>  	
     	

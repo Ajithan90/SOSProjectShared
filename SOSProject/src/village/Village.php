@@ -159,7 +159,7 @@ a:active {
   
 }
 </style>
- <link rel="stylesheet" href="../../css/menu.css">
+ <link rel="stylesheet" href="../../css/menu.css"/>
  
 </head>
 
@@ -188,7 +188,7 @@ a:active {
 <div id="header">   
  
 
-<img   alt="village" src="../../images/village.jpg">
+<img   alt="village" src="../../images/village.jpg"/>
 <h1 align="left">Village Details</h1>
 </div>
 
