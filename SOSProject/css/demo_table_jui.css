@@ -156,17 +156,17 @@ table.display tr.even.gradeU {
     background-color: #EEEEEE;
 }
 tr.odd {
-    background-color: #b5b2de;
+    background-color: #c4f3ff;
 }
 tr.even {
-    background-color:#bbd1ff;
+    background-color:#ffffff;
 }
 .dataTables_scroll {
     clear: both;
 }
 .top, .bottom {
     background-color: #F5F5F5;
-    border: 1px solid #CCCCCC;
+    border: 1px solid #cccccc;
     padding: 15px;
 }
 .top .dataTables_info {
@@ -209,7 +209,7 @@ td.details {
     background-color: #DDDDDD;
 }
 .paging_full_numbers span.paginate_button:hover {
-    background-color: #CCCCCC;
+    background-color: #s;
 }
 .paging_full_numbers span.paginate_active {
     background-color: #99B3FF;
@@ -221,7 +221,7 @@ table.display tr.odd.row_selected td {
     background-color: #9FAFD1;
 }
 tr.odd td.sorting_1 {
-    background-color: #D3D6FF;
+    background-color: #b6ecf9;
 }
 tr.odd td.sorting_2 {
     background-color: #DADCFF;
@@ -230,7 +230,7 @@ tr.odd td.sorting_3 {
     background-color: #E0E2FF;
 }
 tr.even td.sorting_1 {
-    background-color: #EAEBFF;
+    background-color: #f2f2f7;
 }
 tr.even td.sorting_2 {
     background-color: #F2F3FF;

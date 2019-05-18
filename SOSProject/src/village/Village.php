@@ -159,11 +159,32 @@ a:active {
   
 }
 </style>
+ <link rel="stylesheet" href="../../css/menu.css">
+ 
 </head>
 
-<body>
+<body style="background-color:#40c3ce;">
 
-<body style="background-color:#1b217c;">
+<div id='cssmenu'>
+<ul>
+   <li><a href='#'><span>Home</span></a></li>
+   <li class='active has-sub'><a href='#'><span>Category</span></a>
+      <ul>
+         <li class='has-sub'><a href='#'><span>Village</span></a>
+         </li>
+         <li class='has-sub'><a href='#'><span>School</span></a>
+         </li>
+      </ul>
+   </li>
+   <li><a href='#'><span>About US</span></a></li>
+   <li class='last'><a href='#'><span>Contact US</span></a></li>
+   <li class='last'><a href='../logout.php'><span>Log Out</span></a></li>
+</ul>
+</div>
+
+
+
+
 <div id="header">   
  
 
