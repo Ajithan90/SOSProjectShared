@@ -14,18 +14,20 @@
     <body>
    <div class="container">
    <div id="nav-wrapper">
-  <div id="navbar"> <table class="tablewrapper">
+  <div id="navbar"> 
+  <form action="LoginAction.php" method="post">
+  <table class="tablewrapper">
     <tr>
       <td class="row1">User name</td>
       <td class="row1">Password</td>
     </tr>
 
     <tr>
-      <td> <input type="text" class="inputtext"> </td>
+      <td> <input type="text" class="inputtext" name ="username" required="required"> </td>
 
-      <td>  <input type="text" class="inputtext">  </td>
+      <td>  <input type="password" class="inputtext" name ="password" required="required">  </td>
 
-      <td>   <div id="button">  Log In   </div>       </td>
+      <td> <input type="submit" name="login" value="Log In" id="button">    </td>
     </tr>
     
     <tr>
@@ -33,7 +35,7 @@
       
       <td class="row2 ">Forgot your password?</td>
   </table>
-    
+   </form>
     <h1 class="wrapper">  SOS CHILDREN'S VILLAGES  </h1>
       
     <h3 class="wrapper">   A loving home for every child  </h3>

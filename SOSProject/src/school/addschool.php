@@ -8,19 +8,18 @@ header('Location:login.php');
 ?>
 <?php require_once ("../connection.php");
 $ppid="";
-$vname="";
+$sname="";
 $adl1="";
 $adl2="";
 $city="";
 $zip="";
 $dname="";
 $pnum="";
-$email="";
-$vid="";
+$sid="";
 
 if(isset($_GET['ppid'])){
     $ppid = $_GET['ppid'];
-    $sqlLoader="Select from villages where Village_ID=?";
+    $sqlLoader="Select from school where School_ID=?";
     $resLoader=$db->prepare($sqlLoader);
     $resLoader->execute(array($ppid));
 }
@@ -76,19 +75,19 @@ if(isset($_GET['ppid'])){
 <?php
 
 
-$sqladd="Select from villages where Village_ID=?";
+$sqladd="Select from school where School_ID=?";
 	$resadd=$db->prepare($sqladd);
 	$resadd->execute(array($ppid));
 		while($rowadd = $resadd->fetch(PDO::FETCH_ASSOC)){
 				
-				$vname=$rowadd['Village'];
+				$vname=$rowadd['School_name'];
 				$adl1=$rowadd['Address_Line1'];
 				$adl2=$rowadd['Address_Line2'];
 				$city=$rowadd['City'];
 				$zip=$rowadd['ZIP'];
-				$dname=$rowadd['Director_Name'];
+				$dname=$rowadd['District'];
 				$pnum=$rowadd['Telephone_NO'];
-				$email=$rowadd['Email_ID'];
+				
 				
 }
 	
@@ -96,13 +95,13 @@ $sqladd="Select from villages where Village_ID=?";
 	
 ?>
 <body>
-    <form method="post" name="frmvillage" action="savevillage.php">
-    	<h3 align="center"> ADD New Village </h3>
+    <form method="post" name="frmvillage" action="saveschool.php">
+    	<h3 align="center"> ADD New School </h3>
     <input type="hidden" name="pid" value="<?php echo $ppid; ?>"/>
     <table>
      
          <tr>
-    			<td>Village Name:</td><td><input type = "text" name = "village_name" required="required" value="<?php echo $vname; ?>" ><br/></td>
+    			<td>School Name:</td><td><input type = "text" name = "school_name" required="required" value="<?php echo $sname; ?>" ><br/></td>
     		</tr>
     		<tr>
     			<td></td>
@@ -133,7 +132,7 @@ $sqladd="Select from villages where Village_ID=?";
     			<td></td>
     		</tr>
     		<tr>
-    			<td>Director Name: </td><td><input type = "text" name = "director_name" required="required" value="<?php echo $dname; ?>"/><br/></td>
+    			<td>District: </td><td><input type = "text" name = "district" required="required" value="<?php echo $dname; ?>"/><br/></td>
     		</tr>
     		<tr>
     			<td></td>
@@ -142,11 +141,7 @@ $sqladd="Select from villages where Village_ID=?";
     			<td>Phone Number: </td><td><input type = "tel" name = "phone_number" required="required" value="<?php echo $pnum; ?>"/><br/></td>
     		</tr>
     		<tr>
-    			<td></td>
-    		</tr>
-    		<tr>
-    			<td>Email: </td><td><input type ="email"  name = "email" value="<?php echo $email; ?>"/><br/></td>
-    		</tr>
+    		
     		
     	
     	</table>

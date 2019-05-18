@@ -1,6 +1,15 @@
 
+<?php 
+session_start();
 
+// Check, if username session is NOT set then this page will jump to login page
+if ((!isset($_SESSION['user_id']) && (!isset($_SESSION['logd_in'])))) {
+header('Location:login.php');
+}
+?>
 <?php require_once ("../connection.php");//db connection 
+
+
 	
 $vname="";
 $adl1="";
@@ -50,7 +59,9 @@ $vid="";
 <script type="text/javascript" src="../../script/fancybox/jquery.fancybox.js?v=2.1.5"></script>
 <link rel="stylesheet" type="text/css" href="../../script/fancybox/jquery.fancybox.css?v=2.1.5" media="screen" />
 <link rel="stylesheet" type="text/css" href="../../script/fancybox/jquery.fancybox-buttons.css?v=1.0.5" />
+
 <script type="text/javascript" src="../../script/fancybox/jquery.fancybox-buttons.js?v=1.0.5"></script>
+
 <script type="text/javascript">
 $(document).ready(function() {
 	$(".fancybox").fancybox();
@@ -149,14 +160,16 @@ a:active {
 }
 </style>
 </head>
+
+<body>
+
 <body style="background-color:#1b217c;">
 <div id="header">   
  
 
 <img   alt="village" src="../../images/village.jpg">
 <h1 align="left">Village Details</h1>
-   </div>
-
+</div>
 
 <a href="addnewvillage.php" id="myButton" class="fancybox fancybox.ajax">Add</a>
 <br/><br/>
