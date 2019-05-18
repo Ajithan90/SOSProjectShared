@@ -1,4 +1,11 @@
+<?php 
+session_start();
 
+// Check, if username session is NOT set then this page will jump to login page
+if ((!isset($_SESSION['user_id']) && (!isset($_SESSION['logd_in'])))) {
+header('Location:login.php');
+}
+?>
 
 <?php require_once ("../connection.php");//db connection 
 	
@@ -41,7 +48,7 @@ $sid="";
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Village</title>
+<title>School</title>
 <script type="text/javascript" src="../../script/jquery.min.js"></script>
 <script type="text/javascript" src="../../script/fancybox/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="../../script/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
