@@ -52,6 +52,7 @@ $vid="";
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Village</title>
+
 <script type="text/javascript" src="../../script/jquery.min.js"></script>
 <script type="text/javascript" src="../../script/fancybox/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="../../script/fancybox/jquery.mousewheel-3.0.6.pack.js"></script>
@@ -139,11 +140,36 @@ a:active {
 	color: #FFF;
 }
 
+
+#header img {
+  float: left;
+  border-radius: 50%;
+  height:50px;
+  width:10%;
+}
+
+#header h1 {
+  position: relative;
+  top: 3px;
+  left: 10px;
+  font-weight: 600;
+  font-family: 'Titillium Web', sans-serif;  
+  font-size: 36px;
+  color: #ffffff;
+  
+}
 </style>
 </head>
+
 <body>
 
-<h1 align="center">Village Details</h1>
+<body style="background-color:#1b217c;">
+<div id="header">   
+ 
+
+<img   alt="village" src="../../images/village.jpg">
+<h1 align="left">Village Details</h1>
+</div>
 
 <a href="addnewvillage.php" id="myButton" class="fancybox fancybox.ajax">Add</a>
 <br/><br/>
