@@ -155,6 +155,7 @@ a:active {
    <li class='last'><a href='../logout.php'><span>Log Out</span></a></li>
 </ul>
 </div>
+
 <h1 align="center">School Details</h1>
 
 <a href="addschool.php" id="myButton" class="fancybox fancybox.ajax">Add</a>

@@ -122,7 +122,7 @@ $res=$db->prepare($sql);
 $res->execute();
 
 while($rec = $res->fetch(PDO::FETCH_ASSOC)){
-    echo("<option value='".$rec["Village_ID"]."'selected>".$rec["Village_ID"]."</option>");
+    echo("<option value='".$rec["Village_ID"]."'selected='selected'>".$rec["Village_ID"]."</option>");
 }
 	
 ?>

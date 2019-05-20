@@ -8,14 +8,15 @@ if ((!isset($_SESSION['user_id']) && (!isset($_SESSION['logd_in'])))) {
 ?>
 <?php require_once ("../connection.php");
 $ppid="";
-$hname="";
-$vid="";
-$mother="";
-$hid="";
+$fname="";
+$lname="";
+$email="";
+$user="";
+$status="";
 
 if(isset($_GET['ppid'])){
     $ppid = $_GET['ppid'];
-    $sqlLoader="Select from home where Home_ID=?";
+    $sqlLoader="Select from users where uid=?";
     $resLoader=$db->prepare($sqlLoader);
     $resLoader->execute(array($ppid));
 }
@@ -67,52 +68,72 @@ if(isset($_GET['ppid'])){
 	top:1px;
 }
 </style>
+
 </head>
+
 <body>
-    <form method="post" name="frmvillage" action="savehome.php">
-    	<h3 align="center"> ADD New Home </h3>
+    <form method="post" name="frmvillage" action="saveuser.php">
+    	<h3 align="center"> Add New User </h3>
     <input type="hidden" name="pid" value="<?php echo $ppid; ?>"/>
     <table>
      
          <tr>
-    			<td>Home Name:</td><td><input type = "text" name = "home_name" required="required"><br/></td>
+    			<td>First Name:</td><td><input type = "text" name = "f_name" required="required" /><br/></td>
     		</tr>
     		<tr>
     			<td></td>
     		</tr>
     		
     		<tr>
-    			<td>Mother In Charge </td><td><input type = "text" name = "mother" required="required" /><br/></td>
+    			<td>Last Name: </td><td><input type = "text" name = "l_name" required="required" /><br/></td>
     		</tr>
     		<tr>
     			<td></td>
     		</tr>
     		<tr>
-    			<td> Village ID</td>
-    			<td>
+    			<td>Email: </td><td><input type = "email" name = "email" required="required" /><br/></td>
+    		</tr>
+    		<tr>
+    			<td></td>
+    		</tr>
+    		
+    		<tr>
+    			<td>User Name: </td><td><input type = "text" name = "u_name" /><br/></td>
+    		</tr>
+    		<tr>
+    			<td></td>
+    		</tr>
+    		<tr>
+    			<td>Password: </td><td><input type = "password" name = "pass" required="required" id="password" /><br/></td>
+    		</tr>
+    		<tr>
+    			<td></td>
+    		</tr>
+    		<tr>
+    			<td>Confirm Password: </td><td><input type = "password" name = "cpass" required="required" id="confirmPassword" /><br/></td>
     			
-                 <select name="vid" id="" required="required">
-	<option value="">--Select here--</option>
-<?php
-require_once ("../connection.php");
-$sql = "SELECT Village_ID FROM villages;";
-$res=$db->prepare($sql);
-$res->execute();
-
-while($rec = $res->fetch(PDO::FETCH_ASSOC)){
-    echo("<option value='".$rec["Village_ID"]."'>".$rec["Village_ID"]."</option>");
-}
-	
-?>
-</select>
+    		</tr>
+    		<tr>
+    			<td></td>
+    		</tr>
+    		<tr>
+    			<td>Status: </td><td>
+    			<select name = "status" required="required" >
+  					<option value="1">Active</option>
+  					<option value="0">Deactive</option>
+  
+					</select>
     			
-    			
-               </td>
-  </tr>
-               <tr><td></td><td></td><td><input type="submit" class="myButton" value="Save"/></td></tr>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td></td>
+    		</tr>
+    		
+    		<tr><td></td><td></td><td><input type="submit" class="myButton" value="Save" id="submitButton"/></td></tr>
     	
     	</table>
-    	
+    	 
     	
     	</form>
 </body>

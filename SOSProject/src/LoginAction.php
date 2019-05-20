@@ -11,7 +11,7 @@ if(isset($_POST['login'])){
     
     $passwordAttempt= md5($passwordAttempt);
     
-    $sql = "SELECT id, username, password,Status FROM users WHERE username = :username";
+    $sql = "SELECT uid, username, password,Status FROM users WHERE username = :username";
     $stmt = $db->prepare($sql);
     
     $stmt->bindValue(':username', $username);

@@ -31,6 +31,10 @@ header('Location:login.php');
     	
     	</div>
     	<div>
+    	<a href="user/user.php">User</a>
+    	
+    	</div>
+    	<div>
     	<a href="logout.php">Log out</a>
     	
     	</div>

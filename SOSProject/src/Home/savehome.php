@@ -1,7 +1,7 @@
 <?php
 include ('../connection.php');
 $hname=$_POST['home_name'];
-$hid=$_POST['home_id'];
+//$hid=$_POST['home_id'];
 $mother=$_POST['mother'];
 $vid=$_POST['vid'];
 
