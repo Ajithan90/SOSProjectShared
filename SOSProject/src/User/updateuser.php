@@ -26,6 +26,50 @@ if(isset($_GET['ppid'])){
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+<script>
+        function checkupdatePass()
+        {
+           
+            if(document.getElementById('upassy').checked){
+               document.getElementById("pass").style.visibility = 'visible';
+               document.getElementById("cpass").style.visibility = 'visible';
+               document.getElementById("passtxt").required="required";
+               document.getElementById("cpasstxt").required="required";
+               
+            }
+            else if(document.getElementById('upassn').checked){
+                document.getElementById("pass").style.visibility = 'hidden';
+                document.getElementById("cpass").style.visibility = 'hidden';
+                document.getElementById("passtxt").required="";
+                document.getElementById("cpasstxt").required="";
+            
+            }
+        }
+        function ValidaePass(){
+                if(document.getElementById('upassy').checked){
+					
+                	var pass=document.getElementById("passtxt").value;
+                    var cpass=document.getElementById("cpasstxt").value;
+                    
+                    if(pass!=cpass){
+
+                    	var x="Invalid Password Combination";
+                    	document.getElementById("error").innerHTML = x;
+                    	document.getElementById("passtxt").style.borderColor="red";
+                        document.getElementById("cpasstxt").style.borderColor="red";
+                        document.getElementById("passtxt").style.backgroundColor="#ffcccc";
+                        document.getElementById("cpasstxt").style.backgroundColor="#ffcccc";
+                    	return false;
+
+                    	
+
+                     }
+
+                }
+
+
+            }
+    </script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
@@ -96,12 +140,15 @@ while($rowadd = $resadd->fetch(PDO::FETCH_ASSOC)){
 ?>
 
 <body>
-<h1 align="center">Update Village Details</h1>
-    <form method="post" name="frmvillagee" action="saveuser.php">
+<h1 align="center">Update User Details</h1>
+    <form onsubmit="return ValidaePass();" method="post" name="frmvillagee" action="saveuser.php">
     <input type="hidden" name="pid" value="<?php echo $ppid; ?>"/>
     <table>
     		<tr>
     			<td>First Name:</td><td><input type = "text" name = "f_name" required="required" value="<?php echo $fname; ?>"/><br/></td>
+    		</tr>
+    		<tr>
+    			<td></td>
     		</tr>
     		<tr>
         
@@ -124,12 +171,6 @@ while($rowadd = $resadd->fetch(PDO::FETCH_ASSOC)){
     			<td></td>
     		</tr>
     		<tr>
-    			<td>Password: </td><td><input type = "password" name = "pass"/><br/></td>
-    		</tr>
-    		<tr>
-    			<td></td>
-    		</tr>
-    		<tr>
     			<td>Status</td><td>
     			<select name = "status" required="required"  value='<?php echo("<option value='".$status."'selected='selected'>".$status."</option>");?>' >
     			
@@ -137,19 +178,35 @@ while($rowadd = $resadd->fetch(PDO::FETCH_ASSOC)){
   					<option value="0">Deactive</option>
   
 					</select>
-    			
-    			
-    			
-    			
-    			</td>
+               </td>
+    		</tr>
+    		<tr>
+    			<td></td>
+    		</tr>
+    		<tr>
+    			<td>Do you want to update password?</td>
+    			<td>
+    			<input type="radio" name="passrad" value="Yes" required="required" id="upassy" onchange="checkupdatePass()"/> Yes
+  				<input type="radio" name="passrad" value="No" required="required" id="upassn" onchange="checkupdatePass()"/> No 
+  				</td>
+    		</tr>
+    		<tr>
+    			<td></td>
+    		</tr>
+    		<tr id="pass" style="visibility:hidden">
+    			<td>Password: </td><td><input type = "password" name = "pass" id="passtxt"/><br/></td>
+    		</tr>
+    		<tr >
+    			<td></td>
+    		</tr>
+    		<tr id="cpass" style="visibility:hidden">
+    			<td>Confirm Password: </td><td><input type = "password" name = "cpass" id="cpasstxt"/><br/></td>
+    		</tr>
+    		<tr style="color:red">
+    			<td id="error"></td>
     		</tr>
     		
-
-    	
-   
-
-			
-		<tr><td></td><td></td><td><input type="submit" class="myButton" value="Save"/></td></tr>
+    		<tr><td></td><td></td><td><input type="submit" class="myButton" value="Save"/></td></tr>
         
 		
 		</table>
