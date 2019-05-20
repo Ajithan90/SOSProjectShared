@@ -11,7 +11,6 @@ $status=$_POST['status'];
 
 $id=$_POST['pid'];
 if($id==null){
-    if($pass==$cpass){
     $sqlSelection="SELECT uid FROM users ORDER BY uid DESC LIMIT 1";
     $qryselection=$db->prepare($sqlSelection);
     $qryselection->execute();
@@ -42,13 +41,7 @@ $sql="INSERT INTO users(uid,First_Name,Last_Name,Email_ID,username,password,Stat
 
 $qry=$db->prepare($sql);
 $qry->execute(array(':uid'=>$uid,':fname'=>$fname,':lname'=>$lname,':email'=>$email,':user'=>$uname,':pass'=>$pass,':status'=>$status));
-    }
-    else{
-        echo "<script language='javascript' type='text/javascript'>alert('Invalid password combination!')</script>";
-        echo "<script language='javascript' type='text/javascript'>window.open('user.php','_self')</script>";
-        
-        
-    }
+    
 }
 else {
     if($pass!=""){

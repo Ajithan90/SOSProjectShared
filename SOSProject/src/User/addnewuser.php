@@ -68,57 +68,152 @@ if(isset($_GET['ppid'])){
 	top:1px;
 }
 </style>
+<script>
+        
+        function ValidaeData(){
+                
+					
+                	var pass=document.getElementById("password").value;
+                    var cpass=document.getElementById("confirmPassword").value;
+                    var fname=document.getElementById("fname").value;
+                    var lname=document.getElementById("lname").value;
+                    var email=document.getElementById("email").value;
+                    var user=document.getElementById("user").value;
+                    var status=document.getElementById("status").value;
 
+                    
+					
+					if(fname ==""){
+
+						x="Please Fill Required Fields";
+						document.getElementById("error").innerHTML = x;
+                    	document.getElementById("fname").style.borderColor="red";
+                    	document.getElementById("fname").style.backgroundColor="#ffcccc";
+                    	return false;
+
+					}
+					else if(lname ==""){
+
+						x="Please Fill Required Fields";
+						document.getElementById("error").innerHTML = x;
+                    	document.getElementById("lname").style.borderColor="red";
+                    	document.getElementById("lname").style.backgroundColor="#ffcccc";
+                    	return false;
+
+					}
+					else if(email ==""){
+
+						x="Please Fill Required Fields";
+						document.getElementById("error").innerHTML = x;
+                    	document.getElementById("email").style.borderColor="red";
+                    	document.getElementById("email").style.backgroundColor="#ffcccc";
+                    	return false;
+
+					}
+					else if(user ==""){
+
+						x="Please Fill Required Fields";
+						document.getElementById("error").innerHTML = x;
+                    	document.getElementById("user").style.borderColor="red";
+                    	document.getElementById("user").style.backgroundColor="#ffcccc";
+                    	return false;
+
+					}
+					else if(pass ==""){
+						x="Please Fill Required Fields";
+						document.getElementById("error").innerHTML = x;
+                    	document.getElementById("password").style.borderColor="red";
+                    	document.getElementById("password").style.backgroundColor="#ffcccc";
+                    	return false;
+					}
+					else if(cpass ==""){
+
+						x="Please Fill Required Fields";
+						document.getElementById("error").innerHTML = x;
+                    	document.getElementById("confirmPassword").style.borderColor="red";
+                    	document.getElementById("confirmPassword").style.backgroundColor="#ffcccc";
+                    	return false;
+
+					}
+
+					else if(status ==""){
+
+						x="Please Fill Required Fields";
+						document.getElementById("error").innerHTML = x;
+                    	document.getElementById("status").style.borderColor="red";
+                    	document.getElementById("status").style.backgroundColor="#ffcccc";
+                    	return false;
+
+					}
+
+
+
+					else if(pass!=cpass){
+
+                    	var x="Invalid Password Combination";
+                    	document.getElementById("error").innerHTML = x;
+                    	document.getElementById("password").style.borderColor="red";
+                        document.getElementById("confirmPassword").style.borderColor="red";
+                        document.getElementById("password").style.backgroundColor="#ffcccc";
+                        document.getElementById("confirmPassword").style.backgroundColor="#ffcccc";
+                    	return false;
+
+                    	
+
+                    }
+					
+                }
+    </script>
 </head>
 
 <body>
-    <form method="post" name="frmvillage" action="saveuser.php">
+    <form onsubmit="return ValidaeData();" method="post" name="frmvillage" action="saveuser.php">
     	<h3 align="center"> Add New User </h3>
     <input type="hidden" name="pid" value="<?php echo $ppid; ?>"/>
     <table>
      
          <tr>
-    			<td>First Name:</td><td><input type = "text" name = "f_name" required="required" /><br/></td>
+    			<td>First Name:</td><td><input type = "text" name = "f_name" id="fname" /><br/></td>
     		</tr>
     		<tr>
     			<td></td>
     		</tr>
     		
     		<tr>
-    			<td>Last Name: </td><td><input type = "text" name = "l_name" required="required" /><br/></td>
+    			<td>Last Name: </td><td><input type = "text" name = "l_name" id="lname" /><br/></td>
     		</tr>
     		<tr>
     			<td></td>
     		</tr>
     		<tr>
-    			<td>Email: </td><td><input type = "email" name = "email" required="required" /><br/></td>
+    			<td>Email: </td><td><input type = "email" name = "email" id="email" /><br/></td>
     		</tr>
     		<tr>
     			<td></td>
     		</tr>
     		
     		<tr>
-    			<td>User Name: </td><td><input type = "text" name = "u_name" /><br/></td>
+    			<td>User Name: </td><td><input type = "text" name = "u_name" id="user" /><br/></td>
     		</tr>
     		<tr>
     			<td></td>
     		</tr>
     		<tr>
-    			<td>Password: </td><td><input type = "password" name = "pass" required="required" id="password" /><br/></td>
+    			<td>Password: </td><td><input type = "password" name = "pass"  id="password" /><br/></td>
     		</tr>
     		<tr>
     			<td></td>
     		</tr>
     		<tr>
-    			<td>Confirm Password: </td><td><input type = "password" name = "cpass" required="required" id="confirmPassword" /><br/></td>
+    			<td>Confirm Password: </td><td><input type = "password" name = "cpass"  id="confirmPassword" /><br/></td>
     			
     		</tr>
     		<tr>
-    			<td></td>
+    			<td ></td>
     		</tr>
     		<tr>
     			<td>Status: </td><td>
-    			<select name = "status" required="required" >
+    			<select name = "status" required="required" id="status">
   					<option value="1">Active</option>
   					<option value="0">Deactive</option>
   
@@ -126,8 +221,8 @@ if(isset($_GET['ppid'])){
     			
     			</td>
     		</tr>
-    		<tr>
-    			<td></td>
+    		<tr style="color:red">
+    			<td id="error"></td>
     		</tr>
     		
     		<tr><td></td><td></td><td><input type="submit" class="myButton" value="Save" id="submitButton"/></td></tr>
