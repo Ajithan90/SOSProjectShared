@@ -1,5 +1,5 @@
 <?php
-include ('../connection.php');
+include ('../SQLFunctions.php');
 $vname=$_POST['village_name'];
 $adl1=$_POST['address_line1'];
 $adl2=$_POST['address_line2'];
@@ -10,41 +10,37 @@ $pnum=$_POST['phone_number'];
 $email=$_POST['email'];
 
 $id=$_POST['pid'];
+$tablename ="villages";
+
+$form_data=array(
+    
+    'Village_ID' => $Tid,
+    'Village' => $vname,
+    'Address_Line1' => $adl1,
+    'Address_Line2' => $adl2,
+    'City' => $city,
+    'ZIP' => $zip,
+    'Director_Name' => $dname,
+    'Telephone_NO' => $pnum,
+    'Email_ID' => $email
+);
+
 if($id==null){
-    $sqlSelection="SELECT Village_ID FROM villages ORDER BY Village_ID DESC LIMIT 1";
-    $qryselection=$db->prepare($sqlSelection);
-    $qryselection->execute();
-    $nor=$qryselection->fetchColumn();
-    $nor=substr($nor,1);
     
-    if($nor>0){
+    include ('../CommonFunctions.php');
     
-        $nor++;
-        if($nor<10)
-            $vid = "V000".$nor;
-            else if($nor<100)
-                $vid = "V00".$nor;
-                else if($nor<1000)
-                    $vid = "V0".$nor;
-                    else
-                        $vid = "V".$nor;
-                       
-    }
-    else{
-        $vid = "V0001";
-    }
-   
-
-$sql="INSERT INTO villages(Village_ID,Village,Address_Line1,Address_Line2,City,ZIP,Director_Name,Telephone_NO,Email_ID)values
-			(:villid,:viilna,:addl1,:addl2,:city,:zip,:dname,:pnum,:email)";
-
-$qry=$db->prepare($sql);
-$qry->execute(array(':villid'=>$vid,':viilna'=>$vname,':addl1'=>$adl1,':addl2'=>$adl2,':city'=>$city,':zip'=>$zip,':dname'=>$dname,':pnum'=>$pnum,':email'=>$email));
+  
+    
+    
+    
+    
+    GeneratID("Village_ID","$tablename","V");
+        
+       
+    InsertData($tablename, $form_data);
 }
 else {
-    $sql="UPDATE villages SET Village_ID=?,Village=?,Address_Line1=?,Address_Line2=?,City=?,ZIP=?,Director_Name=?,Telephone_NO=?,Email_ID=? where Village_ID=?";
-    $qry=$db->prepare($sql);
-    $qry->execute(array($id,$vname,$adl1,$adl2,$city,$zip,$dname,$pnum,$email,$id));
+    dbRowUpdate($tablename, $form_data, 'Village_ID ='.$Tid);
 }
 
 
