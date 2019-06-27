@@ -1,5 +1,6 @@
 <?php
-include ('../controllers/SQLFunctions.php');
+require("../controllers/CommonFunctions.php");
+
 $vname=$_POST['village_name'];
 $adl1=$_POST['address_line1'];
 $adl2=$_POST['address_line2'];
@@ -9,20 +10,16 @@ $dname=$_POST['director_name'];
 $pnum=$_POST['phone_number'];
 $email=$_POST['email'];
 $Action="";
-
 $id=$_POST['village_id'];
-
 $Tid =$id;
 $tablename ="villages";
+$Where ='Village_ID ='."'".$id."'";
+
 if ($id==null){
-    require("../controllers/CommonFunctions.php");
-    
     
   $id=  GeneratID("Village_ID","$tablename","V");
     
 }
-
-
 
 $form_data=array(
     
@@ -37,23 +34,9 @@ $form_data=array(
     'Email_ID' => $email
 );
 
-if($Tid==null){
-    
-       
-    InsertData($tablename, $form_data);
-    echo "<script language='javascript' type='text/javascript'>alert('Successfully Saved!')</script>";
-}
-else if($Tid!=null && $Action=="Update") {
-    dbRowUpdate($tablename, $form_data, 'Village_ID ='."'".$id."'");
-    echo "<script language='javascript' type='text/javascript'>alert('Successfully Saved!')</script>";
-}
-else{
-    dbRowDelete($tablename, 'Village_ID ='."'".$id."'");
-    echo "<script language='javascript' type='text/javascript'>alert('Successfully Deleted!')</script>";
-    
-}
+
+ProccessData($Tid,$tablename,$form_data,$Where,$Action);
 
 
-//echo "<script language='javascript' type='text/javascript'>window.open('Village.php','_self')</script>";
 
 ?>

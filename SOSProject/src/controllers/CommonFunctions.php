@@ -40,6 +40,29 @@ function GeneratID($IDKey,$tableName,$Prefix){
       
             
     }
-   
+ 
+    function ProccessData($Tid,$tablename,$form_data,$Where,$Action){
+        
+        require ('SQLFunctions.php');
+        
+        if($Tid==null){
+            
+            
+            InsertData($tablename, $form_data);
+            echo "<script language='javascript' type='text/javascript'>alert('Successfully Saved!')</script>";
+        }
+        else if($Tid!=null && $Action=="Update") {
+            dbRowUpdate($tablename, $form_data, 'Village_ID ='."'".$Tid."'");
+            echo "<script language='javascript' type='text/javascript'>alert('Successfully Updated!')</script>";
+        }
+        else{
+            dbRowDelete($tablename, 'Village_ID ='."'".$Tid."'");
+            echo "<script language='javascript' type='text/javascript'>alert('Successfully Deleted!')</script>";
+            
+        }
+        
+        
+        echo "<script language='javascript' type='text/javascript'>window.open('Village.php','_self')</script>";
+    }
     
 ?>
