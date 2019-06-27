@@ -73,4 +73,5 @@ function dbRowDelete($table_name, $where_clause='')
 
     return mysql_query($sql);
 }
+}
 ?>
