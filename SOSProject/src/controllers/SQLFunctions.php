@@ -3,6 +3,7 @@
 function GetData($tablename){
     require_once ("connection.php");
     $sql="Select * from"." ".$tablename;
+    
     $qryselection=mysqli_query($con, $sql);
     
     
@@ -19,14 +20,19 @@ function GetData($tablename){
 }
 
 function InsertData($tablename,$form_data){
-    require_once ("connection.php");
+   // require_once ("connection.php");
+    $con = mysqli_connect("127.0.0.1","root","","sos")
+    or die("SERVER Error ".mysqli_error());
+    
+    $fields = array_keys($form_data);
+    
     $sql = "INSERT INTO ".$tablename."
     (`".implode('`,`', $fields)."`)
     VALUES('".implode("','", $form_data)."')";
     
     $qryselection=mysqli_query($con, $sql);
     
-    $qryselection->close();
+    mysqli_close($con);
 }
 
 function dbRowUpdate($tablename, $form_data, $where_clause='')
@@ -52,13 +58,16 @@ function dbRowUpdate($tablename, $form_data, $where_clause='')
     $sql .= implode(', ', $sets);
     
     $sql .= $whereSQL;
+    echo($sql);
+    $qryselection=mysqli_query($con, $sql);
     
-    return mysql_query($sql);
+    mysqli_close($con);
 }
 
 
 function dbRowDelete($table_name, $where_clause='')
 {
+    require_once ("connection.php");
     $whereSQL = '';
     if(!empty($where_clause))
     {
@@ -71,7 +80,9 @@ function dbRowDelete($table_name, $where_clause='')
         }
     $sql = "DELETE FROM ".$table_name.$whereSQL;
 
-    return mysql_query($sql);
+    $qryselection=mysqli_query($con, $sql);
+    
+    mysqli_close($con);
 }
 }
 ?>
