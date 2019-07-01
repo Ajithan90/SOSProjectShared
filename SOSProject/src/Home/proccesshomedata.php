@@ -2,26 +2,29 @@
 require("../controllers/CommonFunctions.php");
 
 $hname=$_POST['home_name'];
-$mother=$_POST['mother'];
+$phone=$_POST['phone'];
 $vid=$_POST['vid'];
 $id=$_POST['home_id'];
-
+$email=$_POST['email'];
 $Tid =$id;
 $tablename ="home";
-$Where ='Village_ID ='."'".$id."'";
-$Action="";
+$Where ='homeid ='."'".$id."'";
+$Action=$_POST['action'];
+
+
 if ($id==null){
     
-  $id=  GeneratID("Home_ID","$tablename","H");
+  $id=  GeneratID("homeid","$tablename","H");
     
 }
 
 $form_data=array(
     
-    'Home_ID' => $id,
-    'Name' => $hname,
-    'MotherInCharge' => $mother,
-    'Village_ID' => $vid,
+    'homeid' => $id,
+    'home' => $hname,
+    'telephone' => $phone,
+    'villlageid' => $vid,
+    'email' => $email
 );
 
 
