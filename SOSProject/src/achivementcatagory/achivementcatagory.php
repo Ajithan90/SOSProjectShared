@@ -14,11 +14,11 @@ header('Location:../login.php');
 <?php 
 include ('../controllers/SQLFunctions.php'); 
 
-$result=GetData('school');//returns data in json format
+$result=GetData('achivementcatagory');//returns data in json format
  echo($result);
 ?>
 
-<form method="post" name="frmvillage" action="proccessschooldata.php">
+<form method="post" name="frmvillage" action="proccessachivementcatagorydata.php">
     	
     
     
