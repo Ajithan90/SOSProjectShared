@@ -41,10 +41,13 @@ function GeneratID($IDKey,$tableName,$Prefix){
             
     }
  
-    function ProccessData($Tid,$tablename,$form_data,$Where,$Action){
+    function ProccessData($Tid,$tablename,$form_data,$Where){
         
         require ('SQLFunctions.php');
-        
+        $Action=$form_data['Action'];
+        echo $Action;
+        unset($form_data['Action']);
+       
         if($Tid==null){
             
             
@@ -62,7 +65,7 @@ function GeneratID($IDKey,$tableName,$Prefix){
         }
         
         
-        echo "<script language='javascript' type='text/javascript'>window.open('Village.php','_self')</script>";
+       
     }
     
 ?>

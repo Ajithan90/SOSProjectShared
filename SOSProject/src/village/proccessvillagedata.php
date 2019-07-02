@@ -4,8 +4,8 @@ require("../controllers/CommonFunctions.php");
 $form_data=$_POST;
 
 
-$id=array_search("villageid",$form_data);
-echo($id);
+$id=$form_data['villageid'];
+
 $Tid=$id;
 
 $tablename ="village";
@@ -20,7 +20,7 @@ if (!(array_key_exists("villageid",$form_data))){
 
 ProccessData($Tid,$tablename,$form_data,$Where);
 
-echo "<script language='javascript' type='text/javascript'>window.open('Village.php','_self')</script>";
+//echo "<script language='javascript' type='text/javascript'>window.open('Village.php','_self')</script>";
 
 
 

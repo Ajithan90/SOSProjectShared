@@ -72,6 +72,9 @@ $result=GetData('village');//returns data in json format
     		<tr>
     			<td>web: </td><td><input type ="email"  name = "web"/><br/></td>
     		</tr>
+    		<tr>
+    			<input type ="hidden"  name = "Action" value="ADD"/><br/></td>
+    		</tr>
     		
     		<tr><td></td><td></td><td><input type="submit" class="myButton" value="Save"/></td></tr>
     	
