@@ -1,28 +1,26 @@
 <?php
 require("../controllers/CommonFunctions.php");
 
-$achivement=$_POST['achivement'];
-$Action=$_POST['action'];
-$id=$_POST['achivementid'];
-$Tid =$id;
+$form_data=$_POST;
+
+
+$id=$form_data['achivementid'];
+
+$Tid=$id;
+
 $tablename ="achivementcatagory";
 $Where ='achivementid ='."'".$id."'";
 
-if ($id==null){
+
+if (!(array_key_exists("achivementid",$form_data))){
     
-  $id=  GeneratID("achivementid","$tablename","ACAT");
-    
+    $id=  GeneratID("achivementid","$tablename","ACH");
+    $form_data['achivementid']=$id;
 }
 
-$form_data=array(
-    
-    'achivementid' => $id,
-    'achivement' => $achivement,
-    
-);
+ProccessData($Tid,$tablename,$form_data,$Where);
 
-
-ProccessData($Tid,$tablename,$form_data,$Where,$Action);
+echo "<script language='javascript' type='text/javascript'>window.open('Village.php','_self')</script>";
 
 
 

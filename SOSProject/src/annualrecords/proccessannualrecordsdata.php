@@ -1,30 +1,20 @@
 <?php
 require("../controllers/CommonFunctions.php");
 
-$year=$_POST['year'];
-$age=$_POST['age'];
-$height=$_POST['height'];
-$weight=$_POST['weight'];
-$grade=$_POST['grade'];
+$form_data=$_POST;
 
-$Action=$_POST['action'];
-$id=$_POST['admissiionno'];
-$Tid =$id;
+
+$id=$form_data['admissionno'];
+
+$Tid=$id;
+
 $tablename ="annualrecords";
-$Where ='admissiionno ='."'".$id."'";
-
-$form_data=array(
-    
-    'admissiionno' => $id,
-    'year' => $year,
-    'age' => $age,
-    'height' => $height,
-    'weight' => $weight,
-    'grade' => $grade
-);
+$Where ='admissionno ='."'".$id."'";
 
 
-ProccessData($Tid,$tablename,$form_data,$Where,$Action);
+ProccessData($Tid,$tablename,$form_data,$Where);
+
+echo "<script language='javascript' type='text/javascript'>window.open('annualrecords.php','_self')</script>";
 
 
 

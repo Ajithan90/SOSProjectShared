@@ -9,16 +9,14 @@ $id=$form_data['admissionno'];
 
 $Tid=$id;
 
-$tablename ="activities";
+$tablename ="initialmedical";
 $Where ='admissionno ='."'".$id."'";
 
 
 ProccessData($Tid,$tablename,$form_data,$Where);
 
-echo "<script language='javascript' type='text/javascript'>window.open('activities.php','_self')</script>";
+echo "<script language='javascript' type='text/javascript'>window.open('initialmedical.php','_self')</script>";
 
 
 
 ?>
-
-

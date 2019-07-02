@@ -1,28 +1,26 @@
 <?php
 require("../controllers/CommonFunctions.php");
 
-$country=$_POST['cocountryuntry'];
-$Action=$_POST['action'];
-$id=$_POST['countryid'];
-$Tid =$id;
+$form_data=$_POST;
+
+
+$id=$form_data['countryid'];
+
+$Tid=$id;
+
 $tablename ="country";
 $Where ='countryid ='."'".$id."'";
 
-if ($id==null){
+
+if (!(array_key_exists("countryid",$form_data))){
     
-  $id=  GeneratID("countryid","$tablename","CN");
-    
+    $id=  GeneratID("countryid","$tablename","CON");
+    $form_data['countryid']=$id;
 }
 
-$form_data=array(
-    
-    'countryid' => $id,
-    'country' => $country
-   
-);
+ProccessData($Tid,$tablename,$form_data,$Where);
 
-
-ProccessData($Tid,$tablename,$form_data,$Where,$Action);
+echo "<script language='javascript' type='text/javascript'>window.open('country.php','_self')</script>";
 
 
 

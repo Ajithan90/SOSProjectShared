@@ -1,28 +1,26 @@
 <?php
 require("../controllers/CommonFunctions.php");
 
-$agecatagory=$_POST['compertition'];
-$Action=$_POST['action'];
-$id=$_POST['compertitionid'];
-$Tid =$id;
+$form_data=$_POST;
+
+
+$id=$form_data['compertitionid'];
+
+$Tid=$id;
+
 $tablename ="compertitioncatagory";
 $Where ='compertitionid ='."'".$id."'";
 
-if ($id==null){
+
+if (!(array_key_exists("compertitionid",$form_data))){
     
-  $id=  GeneratID("compertitionid","$tablename","COCAT");
-    
+    $id=  GeneratID("compertitionid","$tablename","COCAT");
+    $form_data['compertitionid']=$id;
 }
 
-$form_data=array(
-    
-    'compertitionid' => $id,
-    'compertition' => $agecatagory
-   
-);
+ProccessData($Tid,$tablename,$form_data,$Where);
 
-
-ProccessData($Tid,$tablename,$form_data,$Where,$Action);
+echo "<script language='javascript' type='text/javascript'>window.open('compertitioncatagory.php','_self')</script>";
 
 
 
