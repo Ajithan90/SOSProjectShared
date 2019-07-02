@@ -20,9 +20,8 @@ function GetData($tablename){
 }
 
 function InsertData($tablename,$form_data){
-   // require_once ("connection.php");
-    $con = mysqli_connect("127.0.0.1","root","","sos")
-    or die("SERVER Error ".mysqli_error());
+   include"connection.php";
+    
     
     $fields = array_keys($form_data);
     
@@ -33,6 +32,8 @@ function InsertData($tablename,$form_data){
     $qryselection=mysqli_query($con, $sql);
     
     mysqli_close($con);
+   
+    
 }
 
 function dbRowUpdate($tablename, $form_data, $where_clause='')
