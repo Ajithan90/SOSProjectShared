@@ -1,34 +1,26 @@
 <?php
 require("../controllers/CommonFunctions.php");
 
-$hname=$_POST['home_name'];
-$phone=$_POST['phone'];
-$vid=$_POST['vid'];
-$id=$_POST['home_id'];
-$email=$_POST['email'];
-$Tid =$id;
+$form_data=$_POST;
+
+
+$id=$form_data['homeid'];
+
+$Tid=$id;
+
 $tablename ="home";
 $Where ='homeid ='."'".$id."'";
-$Action=$_POST['action'];
 
 
-if ($id==null){
+if (!(array_key_exists("homeid",$form_data))){
     
-  $id=  GeneratID("homeid","$tablename","H");
-    
+    $id=  GeneratID("homeid","$tablename","H");
+    $form_data['homeid']=$id;
 }
 
-$form_data=array(
-    
-    'homeid' => $id,
-    'home' => $hname,
-    'telephone' => $phone,
-    'villlageid' => $vid,
-    'email' => $email
-);
+ProccessData($Tid,$tablename,$form_data,$Where);
 
-
-ProccessData($Tid,$tablename,$form_data,$Where,$Action);
+echo "<script language='javascript' type='text/javascript'>window.open('home.php','_self')</script>";
 
 
 
