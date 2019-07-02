@@ -5,7 +5,7 @@ $form_data=$_POST;
 
 
 $id=array_search("villageid",$form_data);
-
+echo($id);
 $Tid=$id;
 
 $tablename ="village";
