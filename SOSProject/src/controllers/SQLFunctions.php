@@ -20,8 +20,8 @@ function GetData($tablename){
 }
 
 function InsertData($tablename,$form_data){
-   // require_once ("connection.php");
-    $con = mysqli_connect("127.0.0.1","root","","sos")
+   //require_once ("connection.php");
+    $con = mysqli_connect("127.0.0.1","root","","soscdp")
     or die("SERVER Error ".mysqli_error());
     
     $fields = array_keys($form_data);
@@ -29,10 +29,12 @@ function InsertData($tablename,$form_data){
     $sql = "INSERT INTO ".$tablename."
     (`".implode('`,`', $fields)."`)
     VALUES('".implode("','", $form_data)."')";
-    
+    echo $sql;
     $qryselection=mysqli_query($con, $sql);
     
     mysqli_close($con);
+    print_r($form_data) ;
+    
 }
 
 function dbRowUpdate($tablename, $form_data, $where_clause='')
