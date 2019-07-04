@@ -1,28 +1,26 @@
 <?php
 require("../controllers/CommonFunctions.php");
 
-$agecatagory=$_POST['agecatagory'];
-$Action=$_POST['action'];
-$id=$_POST['ageid'];
-$Tid =$id;
+$form_data=$_POST;
+
+
+$id=$form_data['ageid'];
+
+$Tid=$id;
+
 $tablename ="agecatagory";
 $Where ='ageid ='."'".$id."'";
 
-if ($id==null){
+
+if (!(array_key_exists("ageid",$form_data))){
     
-  $id=  GeneratID("ageid","$tablename","AGCAT");
-    
+    $id=  GeneratID("ageid","$tablename","AGCAT");
+    $form_data['ageid']=$id;
 }
 
-$form_data=array(
-    
-    'ageid' => $id,
-    'agecatagory' => $agecatagory
-   
-);
+ProccessData($Tid,$tablename,$form_data,$Where);
 
-
-ProccessData($Tid,$tablename,$form_data,$Where,$Action);
+echo "<script language='javascript' type='text/javascript'>window.open('agecatagory.php','_self')</script>";
 
 
 
