@@ -30,8 +30,13 @@ function InsertData($tablename,$form_data){
     VALUES('".implode("','", $form_data)."')";
     
     $qryselection=mysqli_query($con, $sql);
-    
-    mysqli_close($con);
+
+    if($qryselection){
+        mysqli_close($con);
+        return $qryselection;
+    }
+    else
+        return mysqli_error($con);
    
     
 }
@@ -61,8 +66,13 @@ function dbRowUpdate($tablename, $form_data, $where_clause='')
     $sql .= $whereSQL;
     echo($sql);
     $qryselection=mysqli_query($con, $sql);
-    
-    mysqli_close($con);
+
+    if($qryselection){
+        mysqli_close($con);
+        return $qryselection;
+    }
+    else
+        return mysqli_error($con);
 }
 
 
@@ -82,8 +92,12 @@ function dbRowDelete($table_name, $where_clause='')
     $sql = "DELETE FROM ".$table_name.$whereSQL;
 
     $qryselection=mysqli_query($con, $sql);
-    
-    mysqli_close($con);
+    if($qryselection){
+        mysqli_close($con);
+        return $qryselection;
+    }
+    else
+        return mysqli_error($con);
 }
 }
 ?>
