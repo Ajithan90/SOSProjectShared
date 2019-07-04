@@ -1,10 +1,23 @@
 <?php
 require("../controllers/CommonFunctions.php");
 $form_data=$_POST;
+
+$id="";
+$Tid="";
+$Where="";
+if($form_data['Action']!="add"){
+
+  $id=$form_data['villageid'];
+  $Where ='villageid ='."'".$id."'";
+}
+
+//echo $Where.''.$form_data['Action'];
+
+=======
 $id=$form_data['villageid'];
-$Tid=$id;
-$tablename ="village";
-$Where ='villageid ='."'".$id."'";
+
+
+
 if (!(array_key_exists("villageid",$form_data))){
     
     $id=  GeneratID("villageid","$tablename","V");

@@ -42,26 +42,22 @@ function GeneratID($IDKey,$tableName,$Prefix){
     }
  
     function ProccessData($Tid,$tablename,$form_data,$Where){
-        
+
         require ('SQLFunctions.php');
         $Action=$form_data['Action'];
-        echo $Action;
         unset($form_data['Action']);
        
         if($Tid==null){
-            
-            
-            InsertData($tablename, $form_data);
-            echo "<script language='javascript' type='text/javascript'>alert('Successfully Saved!')</script>";
+            $r=InsertData($tablename, $form_data);
+            echo "{\"result\":\"".$r.",\"Tid\":\"$Tid\"}";
         }
         else if($Tid!=null && $Action=="Update") {
-            dbRowUpdate($tablename, $form_data, 'Village_ID ='."'".$Tid."'");
-            echo "<script language='javascript' type='text/javascript'>alert('Successfully Updated!')</script>";
+            $r=dbRowUpdate($tablename, $form_data, 'Village_ID ='."'".$Tid."'");
+            echo "{\"result\":\"".$r.",\"Tid\":\"$Tid\"}";
         }
-        else{
-            dbRowDelete($tablename, 'Village_ID ='."'".$Tid."'");
-            echo "<script language='javascript' type='text/javascript'>alert('Successfully Deleted!')</script>";
-            
+        elseif($Tid!=null && $Action=="Delete"){
+            $r=dbRowDelete($tablename, 'Village_ID ='."'".$Tid."'");
+            echo "{\"result\":\"".$r.",\"Tid\":\"$Tid\"}";
         }
         
         
