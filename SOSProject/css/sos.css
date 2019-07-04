@@ -47,6 +47,8 @@ used to vertically center elements, may need modification if you're not using de
     height: 30px;
 }
 
+
+
 .panel-table .panel-body .table-bordered > tbody > tr > td{
     line-height: 34px;
 }
@@ -55,3 +57,4 @@ used to vertically center elements, may need modification if you're not using de
 #container{
     display: none;
 }
+
