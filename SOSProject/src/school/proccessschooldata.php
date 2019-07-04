@@ -1,40 +1,19 @@
 <?php
 require("../controllers/CommonFunctions.php");
+$form_data=$_POST;
+$id=$form_data['schoolid'];
 
-$sname=$_POST['school'];
-$adl1=$_POST['address1'];
-$adl2=$_POST['address2'];
-$city=$_POST['city'];
-$did=$_POST['districtid'];
-$pnum=$_POST['telephone'];
-$email=$_POST['email'];
-$Action=$_POST['action'];
-$id=$_POST['schoolid'];
-$Tid =$id;
+
+$Tid=$id;
 $tablename ="school";
+
 $Where ='schoolid ='."'".$id."'";
 
-if ($id==null){
+if (!(array_key_exists("schoolid",$form_data))){
     
-  $id=  GeneratID("schoolid","$tablename","S");
-    
+    $id=  GeneratID("schoolid","$tablename","SCL");
+    $form_data['schoolid']=$id;
 }
-
-$form_data=array(
-    
-    'schoolid' => $id,
-    'school' => $sname,
-    'address1' => $adl1,
-    'address2' => $adl2,
-    'city' => $city,
-    'districtid' => $did,
-    'telephone' => $pnum,
-    'email' => $email
-);
-
-
-ProccessData($Tid,$tablename,$form_data,$Where,$Action);
-
-
-
+ProccessData($Tid,$tablename,$form_data,$Where);
+echo "<script language='javascript' type='text/javascript'>window.open('school.php','_self')</script>";
 ?>

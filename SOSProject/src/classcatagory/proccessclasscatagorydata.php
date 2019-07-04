@@ -1,28 +1,26 @@
 <?php
 require("../controllers/CommonFunctions.php");
 
-$class=$_POST['class'];
-$Action=$_POST['action'];
-$id=$_POST['classid'];
-$Tid =$id;
-$tablename ="agecatagory";
+$form_data=$_POST;
+
+
+$id=$form_data['classid'];
+
+$Tid=$id;
+
+$tablename ="classcatagory";
 $Where ='classid ='."'".$id."'";
 
-if ($id==null){
+
+if (!(array_key_exists("classid",$form_data))){
     
-  $id=  GeneratID("classid","$tablename","CLS");
-    
+    $id=  GeneratID("classid","$tablename","CLS");
+    $form_data['classid']=$id;
 }
 
-$form_data=array(
-    
-    'classid' => $id,
-    'class' => $class
-   
-);
+ProccessData($Tid,$tablename,$form_data,$Where);
 
-
-ProccessData($Tid,$tablename,$form_data,$Where,$Action);
+echo "<script language='javascript' type='text/javascript'>window.open('classcatagory.php','_self')</script>";
 
 
 
