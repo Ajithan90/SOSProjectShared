@@ -1,40 +1,55 @@
-<?php
-
-// Connect to the Database
-$link = connectToDB();
-
-# Create pie 3d chart object using FusionCharts PHP Class
-$FC = new FusionCharts("Line","450","200");
-
-# Set Relative Path of chart swf file.
-$FC->setSwfPath("FusionCharts/Charts/");
-
-//Store chart attributes in a variable for ease of use
-$strParam="caption= Student Progress By Subject;subCaption=By Marks;pieSliceDepth=30; showBorder=1;showNames=1;formatNumberScale=0; Units;decimalPrecision=0; showPercentageInLabel=1";
-
-# Set chart attributes
-$FC->setChartParams($strParam);
-
-//Fetch all factory records using SQL Query
-// Store chart data values in 'total' column/field
-// and category names in 'FactoryName'
-//$strQuery = "select a.FactoryID, b.FactoryName, sum(a.Quantity) as total from Factory_output a, Factory_Master b where a.FactoryId=b.FactoryId group by a.FactoryId,b.FactoryName";
-
-$sql = "SELECT * from educationmarks where admissionno='AD0001' AND subjectid='S0001';";
-
-$result = mysql_query($sql) or die(mysql_error());
-
-//Pass the SQL Query result to the FusionCharts PHP Class function
-//along with field/column names that are storing chart values and corresponding category names
-//to set chart data from database
-if ($result)
-{
-    $FC->addDataFromDatabase($result, "marks", "year");
-}
-
-mysql_close($link);
-
-
-# Render the chart
-$FC->renderChart();
+<?php 
+			//$Admission=$_POST['admission'];
+			
+    	  require_once("../controllers/connection.php");
+    	  
+    	 // $result = mysqli_query($con,"SELECT * FROM educationmarks where admissionno ='".$Admission."'");
+    	  $result = mysqli_query($con,"SELECT * FROM educationmarks;");
+    	  $data=array();
+    	  $keys=array();
+    	  $i=0;
+    	  while($row = mysqli_fetch_array($result)) {
+    	      
+    	      $keys = array_keys($row);
+    	      $data=array_values($row);
+    	      
+    	  }
+    	  print_r($keys);
+    	  print_r($data);
 ?>
+
+
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+			
+
+          var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses'],
+          ['2004',  1000,      400],
+          ['2005',  1170,      460],
+          ['2006',  660,       1120],
+          ['2007',  1030,      540]
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+  </body>
+</html>
